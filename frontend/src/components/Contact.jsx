@@ -50,7 +50,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-white dark:bg-dark-900">
+    <section id="contact" className="section-padding bg-background">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -63,7 +63,7 @@ const Contact = () => {
             <span className="gradient-text">Get In Touch</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? I'd love to hear from you!
           </p>
         </motion.div>
@@ -78,10 +78,10 @@ const Contact = () => {
             className="space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold text-foreground mb-6">
                 Let's Connect
               </h3>
-              <p className="text-dark-600 dark:text-dark-300 mb-8 leading-relaxed">
+              <p className="text-muted-foreground mb-8 leading-relaxed">
                 I'm always open to discussing new opportunities, interesting projects, or
                 just having a conversation about technology. Feel free to reach out!
               </p>
@@ -93,7 +93,7 @@ const Contact = () => {
                   <Mail className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-dark-900 dark:text-white mb-1">Email</h4>
+                  <h4 className="font-semibold text-foreground mb-1">Email</h4>
                   <a
                     href="kavishkasandaruwan608@gmail.com"
                     className="text-primary-600 dark:text-primary-400 hover:underline"
@@ -108,7 +108,7 @@ const Contact = () => {
                   <Phone className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-dark-900 dark:text-white mb-1">Phone</h4>
+                  <h4 className="font-semibold text-foreground mb-1">Phone</h4>
                   <a
                     href="tel:   +94 70 334 4589"
                     className="text-primary-600 dark:text-primary-400 hover:underline"
@@ -123,8 +123,8 @@ const Contact = () => {
                   <MapPin className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-dark-900 dark:text-white mb-1">Location</h4>
-                  <p className="text-dark-600 dark:text-dark-300">Available for Remote Work</p>
+                  <h4 className="font-semibold text-foreground mb-1">Location</h4>
+                  <p className="text-muted-foreground">Available for Remote Work</p>
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-dark-900 dark:text-white mb-2"
+                  className="block text-sm font-medium text-foreground mb-2"
                 >
                   Name
                 </label>
@@ -153,7 +153,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-dark-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-dark-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-foreground"
                   placeholder="Your Name"
                 />
               </div>
@@ -161,7 +161,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-dark-900 dark:text-white mb-2"
+                  className="block text-sm font-medium text-foreground mb-2"
                 >
                   Email
                 </label>
@@ -172,7 +172,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-dark-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-dark-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-foreground"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -180,7 +180,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-dark-900 dark:text-white mb-2"
+                  className="block text-sm font-medium text-foreground mb-2"
                 >
                   Message
                 </label>
@@ -191,7 +191,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows="6"
-                  className="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-dark-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors resize-none text-dark-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors resize-none text-foreground"
                   placeholder="Your message here..."
                 />
               </div>

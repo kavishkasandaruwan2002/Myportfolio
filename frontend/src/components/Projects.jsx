@@ -37,6 +37,7 @@ const Projects = () => {
       techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io'],
       githubUrl: 'https://github.com/username/pos-system',
       liveUrl: 'https://pos-demo.example.com',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop',
       featured: true,
     },
     {
@@ -46,6 +47,7 @@ const Projects = () => {
       techStack: ['React', 'Express', 'MongoDB', 'JWT', 'Stripe API'],
       githubUrl: 'https://github.com/username/ecommerce-app',
       liveUrl: 'https://ecommerce-demo.example.com',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
       featured: true,
     },
     {
@@ -55,6 +57,7 @@ const Projects = () => {
       techStack: ['Docker', 'GitHub Actions', 'AWS EC2', 'Nginx', 'Node.js'],
       githubUrl: 'https://github.com/username/devops-pipeline',
       liveUrl: 'https://deployment-demo.example.com',
+      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80&auto=format&fit=crop',
       featured: true,
     },
   ];
@@ -79,7 +82,7 @@ const Projects = () => {
 
   if (loading) {
     return (
-      <section id="projects" className="section-padding bg-white dark:bg-dark-900">
+      <section id="projects" className="section-padding bg-background">
         <div className="container-custom">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
@@ -90,7 +93,7 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="section-padding bg-white dark:bg-dark-900">
+    <section id="projects" className="section-padding bg-background">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -103,7 +106,7 @@ const Projects = () => {
             <span className="gradient-text">Projects</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Real-world applications showcasing my skills and expertise
           </p>
         </motion.div>
@@ -119,9 +122,24 @@ const Projects = () => {
               transition={{ delay: index * 0.1 }}
               className="glass rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group"
             >
+              {/* Project Image */}
+              {project.image && (
+                <div className="relative w-full h-48 overflow-hidden bg-muted">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      e.target.src = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop`;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              )}
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {project.name}
                   </h3>
                   {project.featured && (
@@ -131,7 +149,7 @@ const Projects = () => {
                   )}
                 </div>
 
-                <p className="text-dark-600 dark:text-dark-300 mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -140,7 +158,7 @@ const Projects = () => {
                     {project.techStack.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 text-xs font-medium bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 rounded-full"
+                        className="px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full"
                       >
                         {tech}
                       </span>
@@ -154,7 +172,7 @@ const Projects = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 glass hover:bg-dark-100 dark:hover:bg-dark-800 rounded-lg transition-colors text-sm font-medium text-dark-900 dark:text-white"
+                      className="flex items-center gap-2 px-4 py-2 glass hover:bg-muted/80 rounded-lg transition-colors text-sm font-medium text-foreground"
                     >
                       <Github className="w-4 h-4" />
                       Code

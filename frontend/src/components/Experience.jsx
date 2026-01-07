@@ -66,7 +66,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="section-padding bg-gradient-to-b from-dark-50 to-white dark:from-dark-800 dark:to-dark-900">
+    <section id="experience" className="section-padding bg-gradient-to-b from-muted/30 to-background dark:from-muted/20 dark:to-background">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -79,7 +79,7 @@ const Experience = () => {
             <span className="gradient-text">Experience & Training</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             My professional journey and continuous learning path
           </p>
         </motion.div>
@@ -104,7 +104,7 @@ const Experience = () => {
                 >
                   {/* Timeline dot */}
                   <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="w-4 h-4 bg-primary-600 rounded-full border-4 border-white dark:border-dark-900"></div>
+                    <div className="w-4 h-4 bg-primary-600 rounded-full border-4 border-background"></div>
                   </div>
 
                   {/* Content card */}
@@ -119,7 +119,7 @@ const Experience = () => {
                           {getIcon(exp.type)}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">
+                          <h3 className="text-xl font-bold text-foreground mb-1">
                             {exp.title}
                           </h3>
                           <p className="text-primary-600 dark:text-primary-400 font-semibold mb-2">
@@ -128,7 +128,7 @@ const Experience = () => {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-dark-600 dark:text-dark-300">
+                      <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           <span>{exp.period}</span>
@@ -143,7 +143,7 @@ const Experience = () => {
                         {exp.description.map((item, itemIndex) => (
                           <li
                             key={itemIndex}
-                            className="flex items-start gap-2 text-dark-600 dark:text-dark-300"
+                            className="flex items-start gap-2 text-muted-foreground"
                           >
                             <span className="text-primary-600 dark:text-primary-400 mt-1">▸</span>
                             <span>{item}</span>

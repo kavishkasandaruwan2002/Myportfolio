@@ -13,7 +13,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="section-padding bg-white dark:bg-dark-900">
+    <section id="about" className="section-padding bg-background">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -36,13 +36,13 @@ const About = () => {
             variants={fadeInUp}
             className="space-y-6"
           >
-            <p className="text-lg text-dark-600 dark:text-dark-300 leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               I'm a passionate Software Engineer and DevOps enthusiast with expertise in
               building scalable web applications using the MERN stack. My focus is on
               creating efficient, maintainable code and implementing robust DevOps practices
               to ensure seamless deployment and operations.
             </p>
-            <p className="text-lg text-dark-600 dark:text-dark-300 leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               With hands-on experience in containerization, CI/CD pipelines, and cloud
               infrastructure, I bring a holistic approach to software development that
               bridges development and operations.
@@ -50,13 +50,13 @@ const About = () => {
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2 px-4 py-2 glass rounded-lg">
                 <User className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                <span className="text-sm font-medium text-dark-900 dark:text-white">
+                <span className="text-sm font-medium text-foreground">
                   Full Stack Developer
                 </span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 glass rounded-lg">
                 <Award className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                <span className="text-sm font-medium text-dark-900 dark:text-white">
+                <span className="text-sm font-medium text-foreground">
                   DevOps Practitioner
                 </span>
               </div>
@@ -76,16 +76,16 @@ const About = () => {
                   <GraduationCap className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">
+                  <h3 className="text-xl font-bold text-foreground mb-1">
                     Bachelor of Science in Computer Science
                   </h3>
                   <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
                     University Name
                   </p>
-                  <p className="text-dark-600 dark:text-dark-300 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     Graduated: 2024
                   </p>
-                  <p className="text-dark-600 dark:text-dark-300 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     GPA: 3.8/4.0
                   </p>
                 </div>
@@ -93,10 +93,10 @@ const About = () => {
             </div>
 
             <div className="glass p-6 rounded-xl">
-              <h3 className="text-lg font-bold text-dark-900 dark:text-white mb-4">
+              <h3 className="text-lg font-bold text-foreground mb-4">
                 Key Achievements
               </h3>
-              <ul className="space-y-2 text-dark-600 dark:text-dark-300">
+              <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary-600 dark:text-primary-400 mt-1">▸</span>
                   <span>Developed and deployed production-ready web applications</span>
