@@ -105,7 +105,7 @@ const Hero = () => {
                 <div className="text-center md:text-left">
                   <motion.div variants={itemVariants} className="mb-3">
                     <span className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
-                      Senior Software Engineer • Full-Stack • DevOps
+                       Software Engineer • Full-Stack • DevOps
                     </span>
                   </motion.div>
 

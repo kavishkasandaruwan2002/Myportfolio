@@ -41,7 +41,7 @@ export function Footer() {
 							<svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724 9.864 9.864 0 0 1-3.127 1.195 4.916 4.916 0 0 0-8.379 4.482A13.944 13.944 0 0 1 1.671 3.149 4.916 4.916 0 0 0 3.195 9.723 4.9 4.9 0 0 1 .964 9.1v.062a4.916 4.916 0 0 0 3.946 4.817 4.902 4.902 0 0 1-2.212.084 4.917 4.917 0 0 0 4.588 3.417A9.867 9.867 0 0 1 0 19.54 13.94 13.94 0 0 0 7.548 21.5c9.142 0 14.307-7.721 13.995-14.646A9.936 9.936 0 0 0 24 4.557z"/></svg>
 						</a>
 					</div>
-					<div className="text-sm">Contact: <a href="mailto:kavishka@example.com" className="text-primary">kavishka@example.com</a></div>
+					<div className="text-sm">Contact: <a href="mailto:kavishkasandaruwan608@gmail.com" className="text-primary">kavishkasandaruwan608@gmail.com</a></div>
 					<div className="text-xs text-muted-foreground">© {year} Kavishka Sandaruwan</div>
 				</div>
 			</div>

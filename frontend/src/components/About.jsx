@@ -77,16 +77,16 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-1">
-                    Bachelor of Science in Computer Science
+                    Bachelor of Science in Software Engineering
                   </h3>
                   <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
-                    University Name
+                 Sri Lanka Institute of Information Technology(SLIIT)
                   </p>
                   <p className="text-muted-foreground text-sm">
-                    Graduated: 2024
+                    Undergraduate: 2022 - 2026
                   </p>
                   <p className="text-muted-foreground text-sm">
-                    GPA: 3.8/4.0
+                    GPA: 3.11
                   </p>
                 </div>
               </div>
