@@ -143,12 +143,13 @@ const AuroraCanvas: React.FC = () => {
       }
 
       draw() {
+        if (!ctx) return;
         const opacity = 1 - this.age / this.lifetime;
         const particleHue = hue + (this.x / width) * 60;
 
         ctx.beginPath();
-        ctx.fillStyle = `hsla(${particleHue}, 100%, 70%, ${opacity * 0.5})`;
-        ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${particleHue}, 80%, 45%, ${opacity * 0.35})`;
+        ctx.arc(this.x, this.y, 1.8, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -182,11 +183,12 @@ const AuroraCanvas: React.FC = () => {
     };
 
     const animate = () => {
-      ctx.fillStyle = `rgba(0, 2, 26, ${config.trailLength})`;
+      if (!ctx) return;
+      ctx.fillStyle = `rgba(235, 240, 255, 0.1)`;
       ctx.fillRect(0, 0, width, height);
 
       ctx.shadowBlur = config.canvasGlow;
-      ctx.shadowColor = `hsla(${hue}, 100%, 50%, 0.5)`;
+      ctx.shadowColor = `hsla(${hue}, 100%, 50%, 0.3)`;
 
       particles.forEach((p) => {
         p.update(time);

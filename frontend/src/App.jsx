@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -11,66 +11,42 @@ import { Footer } from './components/Footer.jsx';
 import { GlowingEffectDemo } from './components/ui/glowing-effect-demo';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-
   useEffect(() => {
-    // Check for saved theme preference or default to dark mode
-    const savedTheme = localStorage.getItem('darkMode');
-    if (savedTheme !== null) {
-      setDarkMode(savedTheme === 'true');
-    } else {
-      // Default to dark mode
-      setDarkMode(true);
-    }
+    // Ensure light mode is forced for deployment consistency
+    document.documentElement.classList.remove('dark');
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
-    <motion.div 
-      className="min-h-screen bg-background text-foreground transition-colors duration-500 ease-in-out"
-      initial={false}
-      animate={{
-        backgroundColor: darkMode ? 'hsl(var(--background))' : 'hsl(var(--background))',
-      }}
-      transition={{ duration: 0.5 }}
-    >
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+    <div className="min-h-screen bg-white selection:bg-violet-100 selection:text-violet-700">
+      <Navbar />
       <main>
         <Hero />
-        {/* Expertise Showcase with Glowing Effect */}
-        <section className="section-padding bg-gradient-to-b from-background via-background to-muted/20 dark:from-background dark:via-background dark:to-muted/10">
+
+        {/* Expertise Showcase with Modern Layout */}
+        <section className="section-padding bg-slate-50/30">
           <div className="container-custom">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Core Expertise</span>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">
+                Core <span className="text-violet-600">Specializations</span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Areas where I excel and bring value to every project
+              <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
+              <p className="mt-8 text-lg text-slate-500 max-w-2xl mx-auto font-medium">
+                Deep expertise in architecting high-availability systems and seamless user experiences.
               </p>
             </motion.div>
-            <GlowingEffectDemo />
+
+            <div className="p-4 md:p-8 bg-white rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-slate-100">
+              <GlowingEffectDemo />
+            </div>
           </div>
         </section>
+
         <About />
         <Skills />
         <Projects />
@@ -78,9 +54,8 @@ function App() {
         <Contact />
       </main>
       <Footer />
-    </motion.div>
+    </div>
   );
 }
 
 export default App;
-

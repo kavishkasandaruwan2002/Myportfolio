@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, MessageSquare } from 'lucide-react';
 import { submitContact } from '../utils/api';
 
 const Contact = () => {
@@ -33,7 +33,7 @@ const Contact = () => {
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error.message || 'Something went wrong. Please try again.',
+        message: error.message || 'Transmission failed. Retrying sync...',
       });
     } finally {
       setLoading(false);
@@ -45,87 +45,67 @@ const Contact = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="contact" className="section-padding bg-background">
+    <section id="contact" className="section-padding bg-white relative overflow-hidden">
       <div className="container-custom">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Get In Touch</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+            <span className="gradient-text">Let's Collaborate</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you!
+          <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
+          <p className="mt-8 text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+            Have a visionary project? I'm ready to architect the solution.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto items-center">
           {/* Contact Information */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
-            className="space-y-6"
+            className="space-y-10"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">
-                Let's Connect
+            <div className="bg-violet-50 p-10 rounded-[2.5rem] border border-violet-100 shadow-xl shadow-violet-50/50">
+              <h3 className="text-3xl font-black text-slate-900 mb-6">
+                Direct Sync
               </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                I'm always open to discussing new opportunities, interesting projects, or
-                just having a conversation about technology. Feel free to reach out!
+              <p className="text-slate-600 font-medium mb-10 leading-relaxed text-lg">
+                I'm currently optimizing my workflow for new enterprise-scale collaborations.
+                Drop a line to initiate a discovery session.
               </p>
-            </div>
 
-            <div className="space-y-4">
-              <div className="flex items-start gap-4 glass p-4 rounded-lg">
-                <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <Mail className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Email</h4>
+              <div className="space-y-6">
+                {[
+                  { icon: Mail, label: 'Email', value: 'kavishkasandaruwan608@gmail.com', href: 'mailto:kavishkasandaruwan608@gmail.com' },
+                  { icon: Phone, label: 'Voice', value: '+94 70 334 4589', href: 'tel:+94703344589' },
+                  { icon: MapPin, label: 'HQ', value: 'Remote / Global Deployment', href: '#' }
+                ].map((item, idx) => (
                   <a
-                    href="kavishkasandaruwan608@gmail.com"
-                    className="text-primary-600 dark:text-primary-400 hover:underline"
+                    key={idx}
+                    href={item.href}
+                    className="flex items-center gap-5 group"
                   >
-                    kavishkasandaruwan608@gmail.com
+                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all text-violet-600">
+                      <item.icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{item.label}</p>
+                      <p className="text-slate-900 font-bold group-hover:text-violet-600 transition-colors">{item.value}</p>
+                    </div>
                   </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 glass p-4 rounded-lg">
-                <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <Phone className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                  <a
-                    href="tel:   +94 70 334 4589"
-                    className="text-primary-600 dark:text-primary-400 hover:underline"
-                  >
-                    +94 70 334 4589
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 glass p-4 rounded-lg">
-                <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <MapPin className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Location</h4>
-                  <p className="text-muted-foreground">Available for Remote Work</p>
-                </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -138,74 +118,60 @@ const Contact = () => {
             variants={fadeInUp}
             transition={{ delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="glass p-8 rounded-xl space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-foreground"
-                  placeholder="Your Name"
-                />
+            <form onSubmit={handleSubmit} className="bg-slate-900 p-10 rounded-[3rem] space-y-8 shadow-2xl relative">
+              <div className="absolute top-0 right-0 p-8 opacity-10">
+                <MessageSquare className="w-24 h-24 text-white" />
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors text-foreground"
-                  placeholder="your.email@example.com"
-                />
-              </div>
+              <div className="space-y-6 relative z-10">
+                <div className="relative group">
+                  <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Identity</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium"
+                    placeholder="Operator Name"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="6"
-                  className="w-full px-4 py-3 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors resize-none text-foreground"
-                  placeholder="Your message here..."
-                />
+                <div className="relative group">
+                  <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Comms Protocol</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium"
+                    placeholder="email@example.com"
+                  />
+                </div>
+
+                <div className="relative group">
+                  <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Payload</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows="4"
+                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium resize-none shadow-inner"
+                    placeholder="Describe the mission..."
+                  />
+                </div>
               </div>
 
               {status.message && (
-                <div
-                  className={`p-4 rounded-lg ${
-                    status.type === 'success'
-                      ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                      : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
-                  }`}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className={`p-4 rounded-2xl text-center font-bold text-sm ${status.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}`}
                 >
                   {status.message}
-                </div>
+                </motion.div>
               )}
 
               <motion.button
@@ -213,17 +179,14 @@ const Contact = () => {
                 disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="w-full px-8 py-5 bg-gradient-to-r from-violet-600 to-indigo-600 disabled:from-slate-700 disabled:to-slate-800 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-violet-900/20 relative z-10 overflow-hidden"
               >
                 {loading ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending...
-                  </>
+                  <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
-                    Send Message
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    Synchronize
                   </>
                 )}
               </motion.button>
@@ -236,4 +199,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

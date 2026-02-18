@@ -1,11 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Code, Server } from 'lucide-react';
+import { Github, ExternalLink, Code, Server, ArrowRight } from 'lucide-react';
 import { getProjects } from '../utils/api';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const defaultProjects = [
+    {
+      _id: '1',
+      name: 'System Architect POS',
+      description: 'High-performance commerce engine with inventory automation and real-time analytics.',
+      techStack: ['React', 'Node.js', 'Redis', 'PostgreSQL'],
+      githubUrl: 'https://github.com/kavishkasandaruwan2002',
+      liveUrl: '#',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop',
+      featured: true,
+      category: 'FinTech'
+    },
+    {
+      _id: '2',
+      name: 'CloudScale E-Commerce',
+      description: 'Enterprise-grade marketplace featuring distributed architecture and seamless payment flows.',
+      techStack: ['Next.js', 'Go', 'Docker', 'AWS'],
+      githubUrl: 'https://github.com/kavishkasandaruwan2002',
+      liveUrl: '#',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
+      featured: true,
+      category: 'E-Commerce'
+    },
+    {
+      _id: '3',
+      name: 'Resilient Pipeline',
+      description: 'Zero-downtime CI/CD infrastructure with automated security audits and Canary deployments.',
+      techStack: ['GitHub Actions', 'Terraform', 'Kubernetes'],
+      githubUrl: 'https://github.com/kavishkasandaruwan2002',
+      liveUrl: '#',
+      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80&auto=format&fit=crop',
+      featured: true,
+      category: 'DevOps'
+    }
+  ];
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -14,181 +50,117 @@ const Projects = () => {
         if (response.success && response.data.length > 0) {
           setProjects(response.data);
         } else {
-          // Fallback to default projects if API fails or returns empty
           setProjects(defaultProjects);
         }
       } catch (error) {
-        console.error('Error fetching projects:', error);
-        // Fallback to default projects
         setProjects(defaultProjects);
       } finally {
         setLoading(false);
       }
     };
-
     fetchProjects();
   }, []);
-
-  const defaultProjects = [
-    {
-      _id: '1',
-      name: 'Point of Sale (POS) System',
-      description: 'A comprehensive POS system with inventory management, sales tracking, and reporting features. Built with real-time updates and offline capability.',
-      techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io'],
-      githubUrl: 'https://github.com/username/pos-system',
-      liveUrl: 'https://pos-demo.example.com',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop',
-      featured: true,
-    },
-    {
-      _id: '2',
-      name: 'E-Commerce CRUD Application',
-      description: 'Full-featured e-commerce platform with product management, shopping cart, user authentication, and payment integration.',
-      techStack: ['React', 'Express', 'MongoDB', 'JWT', 'Stripe API'],
-      githubUrl: 'https://github.com/username/ecommerce-app',
-      liveUrl: 'https://ecommerce-demo.example.com',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
-      featured: true,
-    },
-    {
-      _id: '3',
-      name: 'DevOps Deployment Pipeline',
-      description: 'Automated CI/CD pipeline using GitHub Actions, Docker containerization, and AWS EC2 deployment with Nginx reverse proxy.',
-      techStack: ['Docker', 'GitHub Actions', 'AWS EC2', 'Nginx', 'Node.js'],
-      githubUrl: 'https://github.com/username/devops-pipeline',
-      liveUrl: 'https://deployment-demo.example.com',
-      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80&auto=format&fit=crop',
-      featured: true,
-    },
-  ];
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const projectVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   if (loading) {
     return (
-      <section id="projects" className="section-padding bg-background">
-        <div className="container-custom">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-          </div>
-        </div>
+      <section id="projects" className="section-padding flex items-center justify-center min-h-[400px]">
+        <div className="w-12 h-12 border-4 border-violet-100 border-t-violet-600 rounded-full animate-spin"></div>
       </section>
     );
   }
 
   return (
-    <section id="projects" className="section-padding bg-background">
+    <section id="projects" className="section-padding bg-white">
       <div className="container-custom">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Projects</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+            <span className="gradient-text">Selected Works</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real-world applications showcasing my skills and expertise
+          <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
+          <p className="mt-8 text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+            Engineering high-impact solutions across web, cloud, and mobile ecosystems.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, index) => (
             <motion.div
               key={project._id || index}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={projectVariants}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
               transition={{ delay: index * 0.1 }}
-              className="glass rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+              className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-violet-100 transition-all duration-500 flex flex-col h-full"
             >
               {/* Project Image */}
-              {project.image && (
-                <div className="relative w-full h-48 overflow-hidden bg-muted">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      // Fallback to placeholder if image fails to load
-                      e.target.src = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop`;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={project.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop'}
+                  alt={project.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-4 py-1.5 bg-white/95 backdrop-blur-md text-xs font-black text-slate-900 rounded-full shadow-lg uppercase tracking-widest border border-slate-100">
+                    {project.category || 'Engineering'}
+                  </span>
                 </div>
-              )}
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                    {project.name}
-                  </h3>
-                  {project.featured && (
-                    <span className="px-2 py-1 text-xs font-semibold bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded">
-                      Featured
-                    </span>
-                  )}
-                </div>
+              </div>
 
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-violet-600 transition-colors">
+                  {project.name}
+                </h3>
+                <p className="text-slate-600 font-medium mb-8 line-clamp-3 leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="mb-6">
-                  <div className="flex flex-wrap gap-2">
+                <div className="mt-auto">
+                  <div className="flex flex-wrap gap-2 mb-8">
                     {project.techStack.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full"
+                        className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-xs font-bold border border-slate-100"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                <div className="flex gap-4">
-                  {project.githubUrl && (
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-50">
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 glass hover:bg-muted/80 rounded-lg transition-colors text-sm font-medium text-foreground"
+                      className="p-3 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
+                      title="View Code"
                     >
-                      <Github className="w-4 h-4" />
-                      Code
+                      <Github className="w-5 h-5" />
                     </a>
-                  )}
-                  {project.liveUrl && (
+
                     <a
                       href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 text-violet-600 font-black hover:gap-3 transition-all"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
+                      Case Study
+                      <ArrowRight className="w-5 h-5" />
                     </a>
-                  )}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -200,4 +172,3 @@ const Projects = () => {
 };
 
 export default Projects;
-

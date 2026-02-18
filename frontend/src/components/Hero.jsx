@@ -12,12 +12,13 @@ const Hero = () => {
       if (mod && typeof mod.initParallax === 'function') {
         cleanup = mod.initParallax();
       }
-    }).catch(() => {});
+    }).catch(() => { });
 
     return () => {
       if (typeof cleanup === 'function') cleanup();
     };
   }, []);
+
   const scrollToSection = (sectionId) => {
     const element = document.querySelector(sectionId);
     if (element) {
@@ -30,18 +31,20 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
+        type: "spring",
+        stiffness: 100,
+        damping: 15
       },
     },
   };
@@ -49,16 +52,16 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary-50 via-background to-primary-50 dark:from-background dark:via-background dark:to-muted/20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-violet-50 via-white to-indigo-50"
     >
       {/* Background aurora canvas handles visual effect */}
 
-      <div className="container-custom section-padding relative z-10 background-coverage background-cover">
+      <div className="container-custom section-padding relative z-10">
         <Suspense fallback={null}>
           <AuroraCanvas />
         </Suspense>
 
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -66,90 +69,73 @@ const Hero = () => {
             className="relative"
           >
             <div className="main">
-              <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
                 <div className="flex-shrink-0 relative group">
                   {/* Animated gradient border */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 dark:from-primary-500 dark:via-primary-400 dark:to-primary-500 opacity-75 blur-xl group-hover:opacity-100 transition-opacity duration-500 gradient-rotate"></div>
-                  
+                  <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-r from-violet-400 via-indigo-500 to-purple-500 opacity-60 blur-3xl group-hover:opacity-100 transition-opacity duration-700"></div>
+
                   {/* Outer glow ring */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary-400/50 via-primary-500/50 to-primary-600/50 dark:from-primary-500/50 dark:via-primary-400/50 dark:to-primary-500/50 p-1">
-                    <div className="w-full h-full rounded-3xl bg-gradient-to-br from-primary-200/30 to-primary-600/30 dark:from-primary-800/30 dark:to-primary-400/30"></div>
+                  <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-r from-violet-400/50 via-indigo-500/50 to-purple-500/50 p-[2px]">
+                    <div className="w-full h-full rounded-[2.5rem] bg-white"></div>
                   </div>
-                  
+
                   {/* Photo container with enhanced styling */}
                   <motion.div
-                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    whileHover={{ scale: 1.02, rotate: 1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative z-10"
+                    className="relative z-10 p-3"
                   >
                     <img
-                      data-scroll-speed="0.14"
                       src={myImage}
                       alt="Kavishka"
-                      className="w-48 h-48 md:w-72 md:h-72 rounded-3xl object-cover ring-4 ring-primary-200/50 dark:ring-primary-800/50 shadow-2xl dark:shadow-primary-900/50 relative z-10 transition-all duration-300 group-hover:ring-primary-300 dark:group-hover:ring-primary-700"
+                      className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-[2.25rem] object-cover shadow-2xl relative z-10 transition-all duration-300 border-4 border-white"
                       style={{
-                        filter: 'brightness(1.05) contrast(1.1) saturate(1.1)',
-                        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(59, 130, 246, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)'
+                        boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.15)'
                       }}
                     />
                   </motion.div>
-                  
-                  {/* Animated particles effect */}
-                  <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-                    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary-400 rounded-full opacity-60 animate-ping" style={{ animationDelay: '0s', animationDuration: '2s' }}></div>
-                    <div className="absolute top-3/4 right-1/4 w-1.5 h-1.5 bg-primary-500 rounded-full opacity-60 animate-ping" style={{ animationDelay: '1s', animationDuration: '2.5s' }}></div>
-                    <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-primary-600 rounded-full opacity-60 animate-ping" style={{ animationDelay: '0.5s', animationDuration: '3s' }}></div>
+
+                  {/* Enhanced floating element */}
+                  <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-white rounded-2xl shadow-2xl flex items-center justify-center animate-float z-20 border border-slate-100">
+                    <Github className="w-8 h-8 text-slate-800" />
                   </div>
                 </div>
 
                 <div className="text-center md:text-left">
-                  <motion.div variants={itemVariants} className="mb-3">
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
-                       Software Engineer • Full-Stack • DevOps
+                  <motion.div variants={itemVariants} className="mb-6">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-50 text-violet-700 text-sm font-bold border border-violet-100 shadow-sm">
+                      <span className="flex h-2 w-2 relative">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
+                      </span>
+                      Available for Projects
                     </span>
                   </motion.div>
 
-                  <motion.h1 variants={itemVariants} className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" data-scroll-speed="0.08">
-                    Hi, I'm <span className="gradient-text">Kavishka Sandaruwan</span> — I build high-performance web platforms
+                  <motion.h1 variants={itemVariants} className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-slate-900" data-scroll-speed="0.08">
+                    Crafting <span className="gradient-text">Digital</span> <br />
+                    Experiences.
                   </motion.h1>
 
-                  <motion.p variants={itemVariants} className="mt-3 text-base md:text-lg text-muted-foreground max-w-2xl" data-scroll-speed="0.05">
-                    I design and ship production-grade web applications and resilient DevOps pipelines. I prioritize performance,
-                    reliability, and developer experience to turn product ideas into scalable, maintainable systems.
+                  <motion.p variants={itemVariants} className="mt-8 text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed font-medium" data-scroll-speed="0.05">
+                    I'm <span className="text-slate-900 font-bold underline decoration-violet-500 decoration-4 underline-offset-4">Kavishka</span>, a System Architect building production-grade web applications and resilient DevOps pipelines.
                   </motion.p>
 
-                  <motion.div variants={itemVariants} className="mt-4 flex flex-wrap gap-2">
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">Scalable Systems</span>
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">CI/CD &amp; Automation</span>
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">Observability &amp; Reliability</span>
-                  </motion.div>
-
-                  <motion.div variants={itemVariants} className="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
+                  <motion.div variants={itemVariants} className="mt-10 flex flex-wrap justify-center md:justify-start gap-5">
                     <button
                       onClick={() => scrollToSection('#projects')}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-lg font-semibold shadow-lg hover:translate-y-[-2px] transition-transform"
-                      aria-label="See my work"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-2xl shadow-slate-200 hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 lg:text-lg"
                     >
-                      See My Work
+                      View Projects
+                      <ChevronDown className="w-5 h-5" />
                     </button>
-
-                    <a
-                      href="/resume.pdf"
-                      download
-                      className="inline-flex items-center gap-2 px-5 py-3 border border-border rounded-lg text-sm font-medium hover:bg-accent/5"
-                      aria-label="Download resume"
-                    >
-                      <Download className="w-4 h-4" />
-                      Résumé
-                    </a>
 
                     <button
                       onClick={() => scrollToSection('#contact')}
-                      className="inline-flex items-center gap-2 px-5 py-3 glass rounded-lg text-sm font-medium"
-                      aria-label="Contact me"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-100 text-slate-900 rounded-2xl font-bold shadow-sm hover:border-violet-200 hover:bg-violet-50/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 lg:text-lg"
                     >
-                      <Mail className="w-4 h-4" />
-                      Let's Talk
+                      <Mail className="w-5 h-5 text-violet-600" />
+                      Get in Touch
                     </button>
                   </motion.div>
                 </div>
@@ -158,17 +144,21 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Scroll indicator (clickable) */}
-        <motion.button
-          onClick={() => scrollToSection('#projects')}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, repeat: Infinity, repeatType: 'reverse', duration: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-background/40 glass p-2 rounded-full"
-          aria-label="Scroll to projects"
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 hidden lg:block"
         >
-          <ChevronDown className="w-6 h-6 text-muted-foreground" />
-        </motion.button>
+          <div className="w-6 h-10 border-2 border-slate-200 rounded-full flex justify-center p-1">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1.5 h-1.5 bg-violet-600 rounded-full"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

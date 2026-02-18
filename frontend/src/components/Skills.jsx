@@ -12,6 +12,7 @@ const Skills = () => {
         { name: 'JavaScript', level: 90 },
       ],
       icon: '🎨',
+      color: 'from-violet-500 to-indigo-500'
     },
     {
       title: 'Backend',
@@ -22,6 +23,7 @@ const Skills = () => {
         { name: 'API Design', level: 80 },
       ],
       icon: '⚙️',
+      color: 'from-indigo-500 to-blue-500'
     },
     {
       title: 'Database',
@@ -31,6 +33,7 @@ const Skills = () => {
         { name: 'Database Design', level: 75 },
       ],
       icon: '💾',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'DevOps',
@@ -42,6 +45,7 @@ const Skills = () => {
         { name: 'Linux', level: 85 },
       ],
       icon: '🚀',
+      color: 'from-violet-600 to-purple-600'
     },
   ];
 
@@ -50,64 +54,66 @@ const Skills = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="skills" className="section-padding bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-muted/20">
+    <section id="skills" className="section-padding bg-slate-50/50">
       <div className="container-custom">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Skills</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+            <span className="gradient-text">My Arsenal</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded mb-4"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Technologies and tools I work with to bring ideas to life
+          <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
+          <p className="mt-8 text-lg text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+            I leverage modern technologies to build high-performance applications and resilient infrastructure.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUp}
               transition={{ delay: categoryIndex * 0.1 }}
-              className="glass p-6 rounded-xl hover:shadow-xl transition-shadow duration-300"
+              className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 hover:scale-[1.02] transition-transform duration-500"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">{category.icon}</span>
-                <h3 className="text-2xl font-bold text-foreground">
+              <div className="flex items-center gap-4 mb-8">
+                <div className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg ring-4 ring-white`}>
+                  {category.icon}
+                </div>
+                <h3 className="text-2xl font-black text-slate-900">
                   {category.title}
                 </h3>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {category.skills.map((skill, index) => (
                   <div key={skill.name}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-foreground">
+                      <span className="text-sm font-bold text-slate-700">
                         {skill.name}
                       </span>
-                      <span className="text-sm text-primary-600 dark:text-primary-400 font-semibold">
+                      <span className="text-xs font-black text-violet-600 px-2 py-1 bg-violet-50 rounded-lg">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2.5 overflow-hidden">
+                    <div className="w-full bg-slate-100/80 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200/50">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
-                        className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full"
+                        transition={{ duration: 1.2, delay: index * 0.1, ease: "circOut" }}
+                        className={`h-full bg-gradient-to-r ${category.color} rounded-full shadow-[0_0_10px_rgba(0,0,0,0.1)]`}
                       />
                     </div>
                   </div>
@@ -122,4 +128,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
