@@ -31,15 +31,17 @@ const navigationLinks = [
   { href: "#contact", label: "Contact", sectionId: "#contact" },
 ]
 
+import ThemeToggle from "./ThemeToggle"
+
 export default function Component() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/60 border-b border-slate-100">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border">
       <div className="container-custom flex h-20 items-center justify-between gap-4">
         {/* Left side: Logo */}
         <div className="flex items-center gap-8">
           <a
             href="#home"
-            className="text-slate-900 font-black text-xl tracking-tighter hover:text-violet-600 transition-colors"
+            className="text-foreground font-black text-xl tracking-tighter hover:text-violet-600 transition-colors"
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();
               scrollToSection('#home');
@@ -57,7 +59,7 @@ export default function Component() {
                     <NavigationMenuLink asChild>
                       <a
                         href={link.href}
-                        className="text-slate-500 hover:text-slate-900 py-2 px-4 font-bold text-sm transition-all rounded-xl hover:bg-slate-50 cursor-pointer"
+                        className="text-muted-foreground hover:text-foreground py-2 px-4 font-bold text-sm transition-all rounded-xl hover:bg-accent cursor-pointer"
                         onClick={(e: React.MouseEvent) => {
                           e.preventDefault();
                           scrollToSection(link.sectionId);
@@ -75,7 +77,7 @@ export default function Component() {
 
         {/* Right side: Actions & Mobile Menu */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-4 border-r border-slate-100 pr-4 mr-2">
+          <div className="hidden lg:flex items-center gap-4 border-r border-border pr-4 mr-2">
             {[
               { icon: Github, href: "https://github.com/kavishkasandaruwan2002" },
               { icon: Twitter, href: "https://twitter.com/" },
@@ -84,16 +86,18 @@ export default function Component() {
               <a
                 key={idx}
                 href={social.href}
-                className="text-slate-400 hover:text-slate-900 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <social.icon size={20} strokeWidth={2.5} />
               </a>
             ))}
           </div>
 
+          <ThemeToggle />
+
           <button
             onClick={() => scrollToSection('#contact')}
-            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-black hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
+            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-black hover:opacity-90 transition-all shadow-lg shadow-primary/20"
           >
             Let's Talk
           </button>
@@ -102,7 +106,7 @@ export default function Component() {
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                className="size-10 md:hidden bg-slate-50 border-slate-100 rounded-xl"
+                className="size-10 md:hidden bg-secondary border-border rounded-xl"
                 variant="outline"
                 size="icon"
               >
@@ -122,13 +126,13 @@ export default function Component() {
                 </svg>
               </Button>
             </PopoverTrigger>
-            <PopoverContent align="end" className="w-64 p-2 rounded-2xl shadow-2xl border-slate-100 glass mt-2">
+            <PopoverContent align="end" className="w-64 p-2 rounded-2xl shadow-2xl border-border bg-popover glass mt-2">
               <nav className="flex flex-col gap-1">
                 {navigationLinks.map((link, index) => (
                   <a
                     key={index}
                     href={link.href}
-                    className="p-3 font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-colors"
+                    className="p-3 font-bold text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-colors"
                     onClick={(e: React.MouseEvent) => {
                       e.preventDefault();
                       scrollToSection(link.sectionId);

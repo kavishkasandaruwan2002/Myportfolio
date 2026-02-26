@@ -50,7 +50,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-white relative overflow-hidden">
+    <section id="contact" className="section-padding bg-background relative overflow-hidden">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -59,11 +59,11 @@ const Contact = () => {
           variants={fadeInUp}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground">
             <span className="gradient-text">Let's Collaborate</span>
           </h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
-          <p className="mt-8 text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+          <p className="mt-8 text-lg text-muted-foreground max-w-2xl mx-auto font-medium">
             Have a visionary project? I'm ready to architect the solution.
           </p>
         </motion.div>
@@ -77,11 +77,11 @@ const Contact = () => {
             variants={fadeInUp}
             className="space-y-10"
           >
-            <div className="bg-violet-50 p-10 rounded-[2.5rem] border border-violet-100 shadow-xl shadow-violet-50/50">
-              <h3 className="text-3xl font-black text-slate-900 mb-6">
+            <div className="bg-secondary p-10 rounded-[2.5rem] border border-border shadow-xl shadow-primary/5">
+              <h3 className="text-3xl font-black text-foreground mb-6">
                 Direct Sync
               </h3>
-              <p className="text-slate-600 font-medium mb-10 leading-relaxed text-lg">
+              <p className="text-muted-foreground font-medium mb-10 leading-relaxed text-lg">
                 I'm currently optimizing my workflow for new enterprise-scale collaborations.
                 Drop a line to initiate a discovery session.
               </p>
@@ -97,12 +97,12 @@ const Contact = () => {
                     href={item.href}
                     className="flex items-center gap-5 group"
                   >
-                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all text-violet-600">
+                    <div className="w-12 h-12 bg-card rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all text-violet-600 border border-border">
                       <item.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{item.label}</p>
-                      <p className="text-slate-900 font-bold group-hover:text-violet-600 transition-colors">{item.value}</p>
+                      <p className="text-xs font-black text-muted-foreground uppercase tracking-widest">{item.label}</p>
+                      <p className="text-foreground font-bold group-hover:text-violet-600 transition-colors">{item.value}</p>
                     </div>
                   </a>
                 ))}
@@ -118,9 +118,9 @@ const Contact = () => {
             variants={fadeInUp}
             transition={{ delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="bg-slate-900 p-10 rounded-[3rem] space-y-8 shadow-2xl relative">
+            <form onSubmit={handleSubmit} className="bg-slate-900 dark:bg-card p-10 rounded-[3rem] space-y-8 shadow-2xl relative border border-slate-800 dark:border-border">
               <div className="absolute top-0 right-0 p-8 opacity-10">
-                <MessageSquare className="w-24 h-24 text-white" />
+                <MessageSquare className="w-24 h-24 text-white dark:text-foreground" />
               </div>
 
               <div className="space-y-6 relative z-10">
@@ -132,7 +132,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium"
+                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium"
                     placeholder="Operator Name"
                   />
                 </div>
@@ -145,7 +145,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium"
+                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium"
                     placeholder="email@example.com"
                   />
                 </div>
@@ -158,7 +158,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white font-medium resize-none shadow-inner"
+                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium resize-none shadow-inner"
                     placeholder="Describe the mission..."
                   />
                 </div>

@@ -184,11 +184,15 @@ const AuroraCanvas: React.FC = () => {
 
     const animate = () => {
       if (!ctx) return;
-      ctx.fillStyle = `rgba(235, 240, 255, 0.1)`;
+
+      const isDark = document.documentElement.classList.contains('dark');
+
+      // Use theme-aware background color
+      ctx.fillStyle = isDark ? 'rgba(7, 10, 15, 0.15)' : 'rgba(235, 240, 255, 0.1)';
       ctx.fillRect(0, 0, width, height);
 
       ctx.shadowBlur = config.canvasGlow;
-      ctx.shadowColor = `hsla(${hue}, 100%, 50%, 0.3)`;
+      ctx.shadowColor = `hsla(${hue}, 100%, 50%, ${isDark ? 0.2 : 0.3})`;
 
       particles.forEach((p) => {
         p.update(time);

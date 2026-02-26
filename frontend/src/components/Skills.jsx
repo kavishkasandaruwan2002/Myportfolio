@@ -59,7 +59,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="section-padding bg-slate-50/50">
+    <section id="skills" className="section-padding bg-secondary/30">
       <div className="container-custom">
         <motion.div
           initial="hidden"
@@ -68,11 +68,11 @@ const Skills = () => {
           variants={fadeInUp}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground">
             <span className="gradient-text">My Arsenal</span>
           </h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 mx-auto rounded-full"></div>
-          <p className="mt-8 text-lg text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="mt-8 text-lg text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed">
             I leverage modern technologies to build high-performance applications and resilient infrastructure.
           </p>
         </motion.div>
@@ -86,13 +86,13 @@ const Skills = () => {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUp}
               transition={{ delay: categoryIndex * 0.1 }}
-              className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 hover:scale-[1.02] transition-transform duration-500"
+              className="bg-card p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-border hover:scale-[1.02] transition-transform duration-500"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg ring-4 ring-white`}>
+                <div className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg ring-4 ring-background`}>
                   {category.icon}
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">
+                <h3 className="text-2xl font-black text-foreground">
                   {category.title}
                 </h3>
               </div>
@@ -100,14 +100,14 @@ const Skills = () => {
                 {category.skills.map((skill, index) => (
                   <div key={skill.name}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-bold text-slate-700">
+                      <span className="text-sm font-bold text-muted-foreground">
                         {skill.name}
                       </span>
-                      <span className="text-xs font-black text-violet-600 px-2 py-1 bg-violet-50 rounded-lg">
+                      <span className="text-xs font-black text-violet-500 px-2 py-1 bg-violet-500/10 rounded-lg">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-slate-100/80 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200/50">
+                    <div className="w-full bg-secondary rounded-full h-3 overflow-hidden p-0.5 border border-border">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
