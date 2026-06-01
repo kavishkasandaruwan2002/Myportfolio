@@ -89,6 +89,10 @@
   .animate-pulse-subtle {
     animation: pulse-subtle 4s ease-in-out infinite;
   }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
 }
 
 @keyframes float {
@@ -142,5 +146,14 @@
 
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

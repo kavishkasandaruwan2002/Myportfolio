@@ -1,10 +1,28 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, Mail, Github } from 'lucide-react';
 import myImage from '@/lib/my.jpeg';
 const AuroraCanvas = React.lazy(() => import('./ui/cosmic-aurora'));
 
 const Hero = () => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const box = card.getBoundingClientRect();
+    const x = e.clientX - box.left - box.width / 2;
+    const y = e.clientY - box.top - box.height / 2;
+    
+    // Calculate tilt angles (max 10 degrees)
+    const tiltX = (y / (box.height / 2)) * -10;
+    const tiltY = (x / (box.width / 2)) * 10;
+    
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
   useEffect(() => {
     let cleanup;
     // dynamic import to avoid SSR issues
@@ -79,18 +97,71 @@ const Hero = () => {
                     <div className="w-full h-full rounded-[2.5rem] bg-card"></div>
                   </div>
 
-                  {/* Photo container with enhanced styling */}
+                  {/* Glassmorphic Metric Badge 1 (top-left) */}
                   <motion.div
-                    whileHover={{ scale: 1.02, rotate: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative z-10 p-3"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5, type: "spring" }}
+                    className="absolute -top-4 -left-6 z-30 flex items-center gap-2.5 px-4 py-2.5 bg-background/70 backdrop-blur-xl border border-violet-500/20 rounded-2xl shadow-xl animate-float pointer-events-none select-none"
+                    style={{ animationDelay: '0s' }}
+                  >
+                    <span className="text-xl">💻</span>
+                    <div>
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">Specialist</p>
+                      <p className="text-xs font-black text-foreground mt-0.5">MERN Stack</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Glassmorphic Metric Badge 2 (middle-right) */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.7, type: "spring" }}
+                    className="absolute top-1/3 -right-6 z-30 flex items-center gap-2.5 px-4 py-2.5 bg-background/70 backdrop-blur-xl border border-indigo-500/20 rounded-2xl shadow-xl animate-float pointer-events-none select-none"
+                    style={{ animationDelay: '2s' }}
+                  >
+                    <span className="text-xl">🚀</span>
+                    <div>
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">DevOps</p>
+                      <p className="text-xs font-black text-foreground mt-0.5">AWS & CI/CD</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Glassmorphic Metric Badge 3 (bottom-left) */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.9, type: "spring" }}
+                    className="absolute -bottom-4 -left-4 z-30 flex items-center gap-2.5 px-4 py-2.5 bg-background/70 backdrop-blur-xl border border-fuchsia-500/20 rounded-2xl shadow-xl animate-float pointer-events-none select-none"
+                    style={{ animationDelay: '4s' }}
+                  >
+                    <span className="text-xl">🎓</span>
+                    <div>
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">SLIIT</p>
+                      <p className="text-xs font-black text-foreground mt-0.5">BSc (Hons)</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Photo container with 3D perspective tilt effect */}
+                  <motion.div
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    animate={{
+                      rotateX: tilt.x,
+                      rotateY: tilt.y,
+                      transformPerspective: 1000
+                    }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    style={{ transformStyle: "preserve-3d" }}
+                    className="relative z-10 p-3 cursor-pointer"
                   >
                     <img
                       src={myImage}
                       alt="Kavishka"
                       className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-[2.25rem] object-cover shadow-2xl relative z-10 transition-all duration-300 border-4 border-card"
                       style={{
-                        boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.25)'
+                        boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.25)',
+                        transform: "translateZ(30px)"
                       }}
                     />
                   </motion.div>
@@ -129,6 +200,15 @@ const Hero = () => {
                       View Projects
                       <ChevronDown className="w-5 h-5" />
                     </button>
+
+                    <a
+                      href="/Kavishka_Resume.pdf"
+                      download="Kavishka_Sandaruwan_CV.pdf"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-violet-500/10 border-2 border-violet-500/20 text-violet-600 dark:text-violet-400 rounded-2xl font-bold shadow-sm hover:bg-violet-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 lg:text-lg cursor-pointer"
+                    >
+                      <Download className="w-5 h-5" />
+                      Download CV
+                    </a>
 
                     <button
                       onClick={() => scrollToSection('#contact')}

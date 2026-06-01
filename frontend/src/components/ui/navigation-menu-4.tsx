@@ -27,7 +27,6 @@ const navigationLinks = [
   { href: "#about", label: "About", sectionId: "#about" },
   { href: "#skills", label: "Skills", sectionId: "#skills" },
   { href: "#projects", label: "Work", sectionId: "#projects" },
-  { href: "#experience", label: "Exp", sectionId: "#experience" },
   { href: "#contact", label: "Contact", sectionId: "#contact" },
 ]
 

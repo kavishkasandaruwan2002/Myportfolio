@@ -9,6 +9,19 @@ const AuroraCanvas: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const mouse = { x: -1000, y: -1000, active: false };
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    };
+    const handleMouseLeave = () => {
+      mouse.active = false;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
     // Attach canvas into the hero section so it fills that section
     const hero = document.getElementById('home');
     let appendedToHero = false;
@@ -133,6 +146,25 @@ const AuroraCanvas: React.FC = () => {
         this.vx += Math.cos(angle) * config.particleSpeed;
         this.vy += Math.sin(angle) * config.particleSpeed;
 
+        // Interactive Cursor Attraction and Swirl
+        if (mouse.active) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 280 && dist > 5) {
+            const pullPercent = (280 - dist) / 280;
+            // Pull force
+            const pullForce = pullPercent * 0.05;
+            this.vx += (dx / dist) * pullForce;
+            this.vy += (dy / dist) * pullForce;
+
+            // Swirl force (perpendicular vector)
+            const swirlForce = pullPercent * 0.04;
+            this.vx += (-dy / dist) * swirlForce;
+            this.vy += (dx / dist) * swirlForce;
+          }
+        }
+
         this.vx *= 0.98;
         this.vy *= 0.98;
 
@@ -213,6 +245,8 @@ const AuroraCanvas: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', setup);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       window.cancelAnimationFrame(animationFrameId);
       try {
         if (appendedToHero && hero && hero.contains(canvas)) {

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Code, Server, ArrowRight } from 'lucide-react';
 import { getProjects } from '../utils/api';
+import SpiralLoader from '@/components/ui/demo';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   const defaultProjects = [
     {
@@ -61,6 +63,12 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
+  const categories = ['All', ...new Set(projects.map(p => p.category || 'Engineering'))];
+
+  const filteredProjects = selectedCategory === 'All'
+    ? projects
+    : projects.filter(p => (p.category || 'Engineering') === selectedCategory);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -73,7 +81,7 @@ const Projects = () => {
   if (loading) {
     return (
       <section id="projects" className="section-padding flex items-center justify-center min-h-[400px]">
-        <div className="w-12 h-12 border-4 border-violet-100 border-t-violet-600 rounded-full animate-spin"></div>
+        <SpiralLoader />
       </section>
     );
   }
@@ -97,75 +105,97 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project._id || index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              transition={{ delay: index * 0.1 }}
-              className="group bg-card rounded-[2.5rem] overflow-hidden border border-border hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col h-full"
+        {/* Dynamic Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                selectedCategory === category
+                  ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105'
+                  : 'bg-background hover:bg-secondary text-muted-foreground hover:text-foreground border-border'
+              }`}
             >
-              {/* Project Image */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={project.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop'}
-                  alt={project.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-4 py-1.5 bg-card/95 backdrop-blur-md text-xs font-black text-foreground rounded-full shadow-lg uppercase tracking-widest border border-border">
-                    {project.category || 'Engineering'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-8 flex flex-col flex-grow">
-                <h3 className="text-2xl font-black text-foreground mb-4 group-hover:text-violet-600 transition-colors">
-                  {project.name}
-                </h3>
-                <p className="text-muted-foreground font-medium mb-8 line-clamp-3 leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="mt-auto">
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.techStack.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-secondary text-muted-foreground rounded-lg text-xs font-bold border border-border"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-6 border-t border-border">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
-                      title="View Code"
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
-
-                    <a
-                      href={project.liveUrl}
-                      className="flex items-center gap-2 text-violet-600 font-black hover:gap-3 transition-all"
-                    >
-                      Case Study
-                      <ArrowRight className="w-5 h-5" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              {category}
+            </button>
           ))}
         </div>
+
+        <motion.div 
+          layout
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                key={project._id || index}
+                className="group bg-card rounded-[2.5rem] overflow-hidden border border-border hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col h-full"
+              >
+                {/* Project Image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={project.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop'}
+                    alt={project.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-4 py-1.5 bg-card/95 backdrop-blur-md text-xs font-black text-foreground rounded-full shadow-lg uppercase tracking-widest border border-border">
+                      {project.category || 'Engineering'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="text-2xl font-black text-foreground mb-4 group-hover:text-violet-600 transition-colors">
+                    {project.name}
+                  </h3>
+                  <p className="text-muted-foreground font-medium mb-8 line-clamp-3 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.techStack.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-secondary text-muted-foreground rounded-lg text-xs font-bold border border-border"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-6 border-t border-border">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
+                        title="View Code"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+
+                      <a
+                        href={project.liveUrl}
+                        className="flex items-center gap-2 text-violet-600 font-black hover:gap-3 transition-all"
+                      >
+                        Case Study
+                        <ArrowRight className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

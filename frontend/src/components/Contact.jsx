@@ -132,7 +132,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium"
+                    className="w-full px-6 py-4 bg-slate-800/40 dark:bg-secondary/40 border border-slate-700/50 dark:border-border hover:border-violet-500/50 focus:border-violet-500 focus:ring-4 focus:ring-violet-500/15 outline-none transition-all duration-300 text-white dark:text-foreground font-medium rounded-2xl shadow-inner placeholder:text-slate-500"
                     placeholder="Operator Name"
                   />
                 </div>
@@ -145,7 +145,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium"
+                    className="w-full px-6 py-4 bg-slate-800/40 dark:bg-secondary/40 border border-slate-700/50 dark:border-border hover:border-violet-500/50 focus:border-violet-500 focus:ring-4 focus:ring-violet-500/15 outline-none transition-all duration-300 text-white dark:text-foreground font-medium rounded-2xl shadow-inner placeholder:text-slate-500"
                     placeholder="email@example.com"
                   />
                 </div>
@@ -158,7 +158,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-6 py-4 bg-slate-800/50 dark:bg-secondary border border-slate-700 dark:border-border rounded-2xl focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 outline-none transition-all text-white dark:text-foreground font-medium resize-none shadow-inner"
+                    className="w-full px-6 py-4 bg-slate-800/40 dark:bg-secondary/40 border border-slate-700/50 dark:border-border hover:border-violet-500/50 focus:border-violet-500 focus:ring-4 focus:ring-violet-500/15 outline-none transition-all duration-300 text-white dark:text-foreground font-medium resize-none shadow-inner placeholder:text-slate-500 rounded-2xl"
                     placeholder="Describe the mission..."
                   />
                 </div>
@@ -177,9 +177,9 @@ const Contact = () => {
               <motion.button
                 type="submit"
                 disabled={loading}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-5 bg-gradient-to-r from-violet-600 to-indigo-600 disabled:from-slate-700 disabled:to-slate-800 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-violet-900/20 relative z-10 overflow-hidden"
+                whileHover={{ scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                className="w-full px-8 py-5 bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600 bg-[length:200%_auto] animate-gradient-rotate disabled:from-slate-700 disabled:to-slate-800 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-violet-500/20 hover:shadow-violet-500/35 relative z-10 overflow-hidden"
               >
                 {loading ? (
                   <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
