@@ -12,10 +12,10 @@ const Projects = () => {
   const defaultProjects = [
     {
       _id: '1',
-      name: 'System Architect POS',
-      description: 'High-performance commerce engine with inventory automation and real-time analytics.',
+      name: 'PowerWise',
+      description: 'A sophisticated smart-grid management platform designed to optimize energy consumption across commercial and residential sectors. PowerWise provides real-time monitoring, predictive analytics for load balancing, and an automated demand-response system to reduce costs and improve grid stability.',
       techStack: ['React', 'Node.js', 'Express', 'MongoDB'],
-      githubUrl: 'https://github.com/kavishkasandaruwan2002/Car-Workshop-System',
+      githubUrl: 'https://github.com/kavishkasandaruwan2002/PowerWise',
       liveUrl: '#',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop',
       featured: true,
@@ -23,10 +23,10 @@ const Projects = () => {
     },
     {
       _id: '2',
-      name: 'CloudScale E-Commerce',
-      description: 'Enterprise-grade marketplace featuring distributed architecture and seamless payment flows.',
-      techStack: ['Next.js', 'Go', 'Docker', 'AWS'],
-      githubUrl: 'https://github.com/kavishkasandaruwan2002',
+      name: 'healthcare-microservices',
+      description: 'A scalable, cloud-native healthcare platform built on a microservices architecture. This system manages patient records, appointment scheduling, and medical data using containerized services, ensuring high availability and seamless data flow between modules.',
+      techStack: ['SpringBoot', 'MySQL', 'Docker', 'Microservices', 'MongoDB', 'RabbitMQ', 'Jwt'],
+      githubUrl: 'https://github.com/kavishkasandaruwan2002/healthcare-microservices',
       liveUrl: '#',
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
       featured: true,
@@ -42,7 +42,18 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80&auto=format&fit=crop',
       featured: true,
       category: 'DevOps'
-    }
+    },
+    {
+      _id: '4',
+      name: 'ui/ux',
+      description: 'UI/UX design for various web and mobile applications.',
+      techStack: ['Figma', 'css'],
+      githubUrl: 'https://www.figma.com/design/GPdxoLGp1IeMVxmJ2OGa9N/Untitled?node-id=0-1&p=f&t=eMuY5BvldNuGdWQa-0',
+      liveUrl: '#',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
+      featured: true,
+      category: 'UI/UX'
+    },
   ];
 
   useEffect(() => {
@@ -111,18 +122,17 @@ const Projects = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
-                selectedCategory === category
-                  ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105'
-                  : 'bg-background hover:bg-secondary text-muted-foreground hover:text-foreground border-border'
-              }`}
+              className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${selectedCategory === category
+                ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105'
+                : 'bg-background hover:bg-secondary text-muted-foreground hover:text-foreground border-border'
+                }`}
             >
               {category}
             </button>
           ))}
         </div>
 
-        <motion.div 
+        <motion.div
           layout
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
