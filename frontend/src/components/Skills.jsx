@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { IconCloudDemo } from '@/components/ui/demo';
 
 const Skills = () => {
   const skillCategories = [
@@ -112,50 +113,72 @@ const Skills = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              transition={{ delay: categoryIndex * 0.1 }}
-              className="bg-card p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-border hover:scale-[1.02] transition-transform duration-500"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg ring-4 ring-background`}>
-                  {category.icon}
-                </div>
-                <h3 className="text-2xl font-black text-foreground">
-                  {category.title}
-                </h3>
-              </div>
-              <div className="space-y-6">
-                {category.skills.map((skill, index) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-bold text-muted-foreground">
-                        {skill.name}
-                      </span>
-                      <span className="text-xs font-black text-violet-500 px-2 py-1 bg-violet-500/10 rounded-lg">
-                        {skill.level}%
-                      </span>
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+          {/* Skill Categories Grid (Left Side) */}
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6 lg:gap-8">
+            {skillCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={category.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeInUp}
+                transition={{ delay: categoryIndex * 0.1 }}
+                className="bg-card p-6 md:p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-border hover:scale-[1.02] transition-transform duration-500 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-2xl shadow-lg ring-4 ring-background`}>
+                      {category.icon}
                     </div>
-                    <div className="w-full bg-secondary rounded-full h-3 overflow-hidden p-0.5 border border-border">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: index * 0.1, ease: "circOut" }}
-                        className={`h-full bg-gradient-to-r ${category.color} rounded-full shadow-[0_0_10px_rgba(0,0,0,0.1)]`}
-                      />
-                    </div>
+                    <h3 className="text-xl md:text-2xl font-black text-foreground">
+                      {category.title}
+                    </h3>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  <div className="space-y-5">
+                    {category.skills.map((skill, index) => (
+                      <div key={skill.name}>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <span className="text-xs md:text-sm font-bold text-muted-foreground">
+                            {skill.name}
+                          </span>
+                          <span className="text-[10px] md:text-xs font-black text-violet-500 px-2 py-0.5 bg-violet-500/10 rounded-lg">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-secondary rounded-full h-2.5 overflow-hidden p-0.5 border border-border">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, delay: index * 0.1, ease: "circOut" }}
+                            className={`h-full bg-gradient-to-r ${category.color} rounded-full shadow-[0_0_10px_rgba(0,0,0,0.1)]`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Interactive Icon Cloud (Right Side) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-5 flex flex-col justify-center items-center bg-card/30 backdrop-blur-md rounded-[2.5rem] border border-border/80 p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[450px]"
+          >
+            {/* Glowing background circles for modern premium aesthetic */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-violet-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+            <div className="absolute top-1/3 left-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px] pointer-events-none -z-10 animate-float" style={{ animationDelay: '2s' }}></div>
+            
+            <div className="relative z-10 w-full h-full flex justify-center items-center">
+              <IconCloudDemo />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
