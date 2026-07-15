@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Code, Server, ArrowRight } from 'lucide-react';
 import { getProjects } from '../utils/api';
-import SpiralLoader from '@/components/ui/demo';
+import SpiralLoader from '@/components/ui/spiral-loader';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
